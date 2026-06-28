@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finder Studio</title>
+    <style>
+        /* === 全局重置 & 深色主题 === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', Roboto, system-ui, sans-serif;
+            background: #0b0d10;
+            color: #f5f5f7;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* === 导航栏 —— Liquid Glass 毛玻璃 === */
+        .navbar {
+            background: rgba(11, 13, 16, 0.50);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 700;
+            color: #f5f5f7;
+            letter-spacing: -0.02em;
+        }
+
+        .brand span {
+            color: #60a5fa;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.6);
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        /* === 宗旨区域 —— Apple 左对齐大标题 === */
+        .mission-section {
+            padding: 100px 0 60px;
+        }
+
+        .mission-section h2 {
+            font-size: 56px;
+            font-weight: 700;
+            color: #f5f5f7;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            text-align: left;
+            max-width: 700px;
+        }
+
+        .mission-section .highlight {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .mission-section .tagline {
+            font-size: 21px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 12px 0 16px;
+            text-align: left;
+            letter-spacing: -0.01em;
+        }
+
+        .mission-section .desc {
+            font-size: 17px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 580px;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            border-radius: 4px;
+            margin: 40px 0 0;
+        }
+
+        /* === 作品区域（位于宗旨和成员之间） === */
+        .works-section {
+            padding: 20px 0 60px;
+        }
+
+        .works-section .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #f5f5f7;
+            text-align: left;
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+        }
+
+        .works-section .section-sub {
+            text-align: left;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 28px;
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 760px;
+            margin: 0;
+        }
+
+        .work-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 24px 26px 22px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            color: #f5f5f7;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: block;
+        }
+
+        .work-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+        }
+
+        .work-card .work-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .work-card .work-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #f5f5f7;
+            letter-spacing: -0.01em;
+        }
+
+        .work-card .work-desc {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 4px;
+        }
+
+        .work-card .work-tag {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 2px 14px;
+            background: rgba(96, 165, 250, 0.10);
+            color: #60a5fa;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid rgba(96, 165, 250, 0.06);
+        }
+
+        /* === 成员区域 === */
+        .team-section {
+            padding: 20px 0 80px;
+        }
+
+        .team-section .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #f5f5f7;
+            text-align: left;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+
+        .team-section .section-sub {
+            text-align: left;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 17px;
+            font-weight: 400;
+            margin-bottom: 48px;
+        }
+
+        /* 每行 2 张卡片 */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 760px;
+            margin: 0;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 32px 28px 28px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .team-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .team-card .avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .team-card .name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f5f5f7;
+            letter-spacing: -0.01em;
+        }
+
+        .team-card .role {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 6px 0 8px;
+            letter-spacing: 0.3px;
+        }
+
+        .team-card .hobby {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 16px;
+        }
+
+        .team-card .hobby span {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* 联系方式按钮组 */
+        .team-card .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .team-card .contact-link {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(96, 165, 250, 0.10);
+            color: #60a5fa;
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(96, 165, 250, 0.08);
+        }
+
+        .team-card .contact-link:hover {
+            background: #60a5fa;
+            color: #0b0d10;
+            transform: scale(1.04);
+        }
+
+        /* 第三张卡自动居中 */
+        .team-grid .team-card:last-child:nth-child(3) {
+            grid-column: 1 / -1;
+            max-width: 368px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* === 页脚 === */
+        .footer {
+            text-align: left;
+            padding: 40px 0 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.25s;
+        }
+
+        .footer a:hover {
+            color: #ffffff;
+        }
+
+        /* === 响应式：手机上一行变一列 === */
+        @media (max-width: 640px) {
+            .navbar .container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .nav-links {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .mission-section {
+                padding: 60px 0 40px;
+            }
+            .mission-section h2 {
+                font-size: 34px;
+            }
+            .mission-section .tagline {
+                font-size: 18px;
+            }
+            .works-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            .team-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            .team-grid .team-card:last-child:nth-child(3) {
+                max-width: 100%;
+            }
+            .footer {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 导航栏（毛玻璃） ===== -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="brand">Finder<span>Studio</span></div>
+            <ul class="nav-links">
+                <li><a href="#mission">宗旨</a></li>
+                <li><a href="#works">作品</a></li>
+                <li><a href="#team">成员</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== 主体 ===== -->
+    <main>
+
+        <!-- 宗旨区域 -->
+        <section class="mission-section" id="mission">
+            <div class="container">
+                <h2>探索 · 创造 · <span class="highlight">连接</span></h2>
+                <p class="tagline">Finder Studio —— 用设计和技术讲好每一个故事</p>
+                <p class="desc">
+                    我们是一支跨学科的小型创意工作室，专注数字产品设计、品牌视觉与交互体验。<br />
+                    相信简洁、真诚的设计能让人与信息产生更深的连接。
+                </p>
+                <div class="divider"></div>
+            </div>
+        </section>
+
+        <!-- ===== 作品区域（宗旨下方，成员上方） ===== -->
+        <section class="works-section" id="works">
+            <div class="container">
+                <h3 class="section-title">📁 作品</h3>
+                <p class="section-sub">我们做的一些小东西</p>
+
+                <div class="works-grid">
+
+                    <a href="https://cnfinder-linux.github.io/Finder-/" class="work-card" target="_blank">
+                        <div class="work-icon">🏠</div>
+                        <div class="work-name">Finder Studio 主站</div>
+                        <div class="work-desc">工作室介绍 · 成员展示 · 作品集</div>
+                        <span class="work-tag">✦ 工作室官网</span>
+                    </a>
+
+                    <a href="https://cnfinder-linux.github.io/F-sousuo" class="work-card" target="_blank">
+                        <div class="work-icon">🔍</div>
+                        <div class="work-name">简洁导航页</div>
+                        <div class="work-desc">轻量级导航 · 快速跳转</div>
+                        <span class="work-tag">✦ 工具页</span>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 成员区域 -->
+        <section class="team-section" id="team">
+            <div class="container">
+                <h3 class="section-title">🧑‍🤝‍🧑 工作室成员</h3>
+                <p class="section-sub">三个人，三种角色，一样的执着</p>
+
+                <div class="team-grid">
+
+                    <!-- ★ 成员 1：Finder -->
+                    <div class="team-card">
+                        <div class="avatar">🧑‍💻</div>
+                        <div class="name">Finder</div>
+                        <div class="role">计算机 · 技术负责人</div>
+                        <div class="hobby"><span>爱好：</span>编程 · 科技</div>
+                        <div class="contact-links">
+                            <a href="mailto:CNFinder@outlook.com" class="contact-link">📧 邮箱</a>
+                            <a href="https://x.com/CNFinderMC" class="contact-link" target="_blank">🐦 X</a>
+                            <a href="https://space.bilibili.com/3546979512617388" class="contact-link" target="_blank">📺 B站</a>
+                        </div>
+                    </div>
+
+                    <!-- 成员 2：林一 -->
+                    <div class="team-card">
+                        <div class="avatar">🎨</div>
+                        <div class="name">林一</div>
+                        <div class="role">设计合伙人</div>
+                        <div class="hobby"><span>爱好：</span>摄影 · 黑胶</div>
+                        <div class="contact-links">
+                            <a href="https://www.bilibili.com/404" class="contact-link" target="_blank">📺 B站</a>
+                        </div>
+                    </div>
+
+                    <!-- 成员 3：周觉（自动居中） -->
+                    <div class="team-card">
+                        <div class="avatar">📸</div>
+                        <div class="name">周觉</div>
+                        <div class="role">内容与策划</div>
+                        <div class="hobby"><span>爱好：</span>写作 · 咖啡</div>
+                        <div class="contact-links">
+                            <a href="https://www.bilibili.com/404" class="contact-link" target="_blank">📺 B站</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== 页脚 ===== -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <p>© 2026 Finder Studio · 用设计连接人与信息</p>
+            <p style="margin-top:4px; font-size:13px; color:rgba(255,255,255,0.2);">
+                📧 <a href="cnfinder-linux.github.io/Finder——">finder@example.com</a> &nbsp;·&nbsp; 📍 线上协作 · 杭州
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
