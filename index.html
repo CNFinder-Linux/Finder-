@@ -146,11 +146,12 @@
             margin-bottom: 28px;
         }
 
+        /* 作品卡片网格：自动适应，每行3个 */
         .works-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            max-width: 760px;
+            max-width: 100%;
             margin: 0;
         }
 
@@ -159,7 +160,7 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-radius: 20px;
-            padding: 24px 26px 22px;
+            padding: 24px 22px 22px;
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             text-decoration: none;
@@ -181,16 +182,17 @@
         }
 
         .work-card .work-name {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 600;
             color: #f5f5f7;
             letter-spacing: -0.01em;
         }
 
         .work-card .work-desc {
-            font-size: 14px;
+            font-size: 13px;
             color: rgba(255, 255, 255, 0.5);
             margin-top: 4px;
+            line-height: 1.5;
         }
 
         .work-card .work-tag {
@@ -417,7 +419,7 @@
             </div>
         </section>
 
-        <!-- ===== 作品区域（宗旨下方，成员上方） ===== -->
+        <!-- ===== 作品区域 ===== -->
         <section class="works-section" id="works">
             <div class="container">
                 <h3 class="section-title">📁 作品</h3>
@@ -436,6 +438,14 @@
                         <div class="work-icon">🔍</div>
                         <div class="work-name">简洁导航页</div>
                         <div class="work-desc">轻量级导航 · 快速跳转</div>
+                        <span class="work-tag">✦ 工具页</span>
+                    </a>
+
+                    <!-- ===== 新增作品：Linux 镜像跳转站 ===== -->
+                    <a href="https://cnfinder-linux.github.io/F-Linux" class="work-card" target="_blank">
+                        <div class="work-icon">🐧</div>
+                        <div class="work-name">Linux 镜像跳转站</div>
+                        <div class="work-desc">15个发行版 · 官方下载 · 国内镜像源</div>
                         <span class="work-tag">✦ 工具页</span>
                     </a>
 
@@ -497,7 +507,7 @@
         <div class="container">
             <p>© 2026 Finder Studio · 用设计连接人与信息</p>
             <p style="margin-top:4px; font-size:13px; color:rgba(255,255,255,0.2);">
-                📧 <a href="cnfinder-linux.github.io/Finder——">finder@example.com</a> &nbsp;·&nbsp; 📍 线上协作 · 杭州
+                📧 <a href="mailto:finder@example.com">finder@example.com</a> &nbsp;·&nbsp; 📍 线上协作 · 杭州
             </p>
         </div>
     </footer>
