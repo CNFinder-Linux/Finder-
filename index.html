@@ -124,7 +124,7 @@
             margin: 40px 0 0;
         }
 
-        /* === 作品区域（位于宗旨和成员之间） === */
+        /* === 作品区域 === */
         .works-section {
             padding: 20px 0 60px;
         }
@@ -146,7 +146,6 @@
             margin-bottom: 28px;
         }
 
-        /* 作品卡片网格：自动适应，每行3个 */
         .works-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -229,7 +228,6 @@
             margin-bottom: 48px;
         }
 
-        /* 每行 2 张卡片 */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -283,6 +281,7 @@
             color: rgba(255, 255, 255, 0.5);
             margin: 6px 0 8px;
             letter-spacing: 0.3px;
+            line-height: 1.5;
         }
 
         .team-card .hobby {
@@ -295,7 +294,6 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
-        /* 联系方式按钮组 */
         .team-card .contact-links {
             display: flex;
             flex-wrap: wrap;
@@ -349,7 +347,6 @@
             color: #ffffff;
         }
 
-        /* === 响应式：手机上一行变一列 === */
         @media (max-width: 640px) {
             .navbar .container {
                 flex-direction: column;
@@ -390,7 +387,6 @@
 </head>
 <body>
 
-    <!-- ===== 导航栏（毛玻璃） ===== -->
     <nav class="navbar">
         <div class="container">
             <div class="brand">Finder<span>Studio</span></div>
@@ -403,10 +399,8 @@
         </div>
     </nav>
 
-    <!-- ===== 主体 ===== -->
     <main>
 
-        <!-- 宗旨区域 -->
         <section class="mission-section" id="mission">
             <div class="container">
                 <h2>探索 · 创造 · <span class="highlight">连接</span></h2>
@@ -419,49 +413,40 @@
             </div>
         </section>
 
-        <!-- ===== 作品区域 ===== -->
         <section class="works-section" id="works">
             <div class="container">
                 <h3 class="section-title">📁 作品</h3>
                 <p class="section-sub">我们做的一些小东西</p>
-
                 <div class="works-grid">
-
                     <a href="https://cnfinder-linux.github.io/Finder-/" class="work-card" target="_blank">
                         <div class="work-icon">🏠</div>
                         <div class="work-name">Finder Studio 主站</div>
                         <div class="work-desc">工作室介绍 · 成员展示 · 作品集</div>
                         <span class="work-tag">✦ 工作室官网</span>
                     </a>
-
                     <a href="https://cnfinder-linux.github.io/F-sousuo" class="work-card" target="_blank">
                         <div class="work-icon">🔍</div>
                         <div class="work-name">简洁导航页</div>
                         <div class="work-desc">轻量级导航 · 快速跳转</div>
                         <span class="work-tag">✦ 工具页</span>
                     </a>
-
-                    <!-- ===== 新增作品：Linux 镜像跳转站 ===== -->
                     <a href="https://cnfinder-linux.github.io/F-Linux" class="work-card" target="_blank">
                         <div class="work-icon">🐧</div>
                         <div class="work-name">Linux 镜像跳转站</div>
                         <div class="work-desc">15个发行版 · 官方下载 · 国内镜像源</div>
                         <span class="work-tag">✦ 工具页</span>
                     </a>
-
                 </div>
             </div>
         </section>
 
-        <!-- 成员区域 -->
         <section class="team-section" id="team">
             <div class="container">
                 <h3 class="section-title">🧑‍🤝‍🧑 工作室成员</h3>
                 <p class="section-sub">三个人，三种角色，一样的执着</p>
-
                 <div class="team-grid">
 
-                    <!-- ★ 成员 1：Finder -->
+                    <!-- 成员 1：Finder -->
                     <div class="team-card">
                         <div class="avatar">🧑‍💻</div>
                         <div class="name">Finder</div>
@@ -474,14 +459,15 @@
                         </div>
                     </div>
 
-                    <!-- 成员 2：机器猫 -->
+                    <!-- 成员 2：机器猫（职务已缩短为两行） -->
                     <div class="team-card">
                         <div class="avatar">🎨</div>
                         <div class="name">机器猫</div>
-                        <div class="role">拓界集团有限公司创始人、Finder studio工作室集团负责人</div>
-                        <div class="hobby"><span>爱好：</span>科技、摄影</div>
+                        <div class="role">拓界集团有限公司 创始人<br>Finder Studio 工作室集团 负责人</div>
+                        <div class="hobby"><span>爱好：</span>科技 · 摄影</div>
                         <div class="contact-links">
-                       <a href="mailto:2221995107@qq.com" class="contact-link">📧 邮箱</a>
+                            <a href="mailto:2221995107@qq.com" class="contact-link">📧 邮箱</a>
+                        </div>
                     </div>
 
                     <!-- 成员 3：周觉（自动居中） -->
@@ -501,7 +487,6 @@
 
     </main>
 
-    <!-- ===== 页脚 ===== -->
     <footer class="footer" id="contact">
         <div class="container">
             <p>© 2026 Finder Studio · 用设计连接人与信息</p>
