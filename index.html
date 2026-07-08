@@ -206,7 +206,7 @@
             border: 1px solid rgba(96, 165, 250, 0.06);
         }
 
-        /* === 成员区域 === */
+        /* === 成员区域 - 三列一行 === */
         .team-section {
             padding: 20px 0 80px;
         }
@@ -228,11 +228,12 @@
             margin-bottom: 48px;
         }
 
+        /* 三列网格，去掉最大宽度限制，让卡片均匀分布 */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
-            max-width: 760px;
+            max-width: 100%;
             margin: 0;
         }
 
@@ -241,11 +242,13 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-radius: 24px;
-            padding: 32px 28px 28px;
+            padding: 28px 20px 24px;
             text-align: left;
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
         }
 
         .team-card:hover {
@@ -256,38 +259,40 @@
         }
 
         .team-card .avatar {
-            width: 72px;
-            height: 72px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
+            font-size: 26px;
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.06);
+            flex-shrink: 0;
         }
 
         .team-card .name {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             color: #f5f5f7;
             letter-spacing: -0.01em;
         }
 
         .team-card .role {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: rgba(255, 255, 255, 0.5);
-            margin: 6px 0 8px;
+            margin: 4px 0 8px;
             letter-spacing: 0.3px;
             line-height: 1.5;
+            flex: 1;
         }
 
         .team-card .hobby {
-            font-size: 15px;
+            font-size: 14px;
             color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .team-card .hobby span {
@@ -297,18 +302,18 @@
         .team-card .contact-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 4px;
+            gap: 6px;
+            margin-top: auto;
         }
 
         .team-card .contact-link {
             display: inline-block;
-            padding: 6px 16px;
+            padding: 5px 14px;
             background: rgba(96, 165, 250, 0.10);
             color: #60a5fa;
             border-radius: 40px;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             border: 1px solid rgba(96, 165, 250, 0.08);
@@ -320,13 +325,7 @@
             transform: scale(1.04);
         }
 
-        /* 第三张卡自动居中 */
-        .team-grid .team-card:last-child:nth-child(3) {
-            grid-column: 1 / -1;
-            max-width: 368px;
-            margin: 0 auto;
-            width: 100%;
-        }
+        /* 移除之前的第三张居中规则，因为三列自然排列 */
 
         /* === 页脚 === */
         .footer {
@@ -375,9 +374,6 @@
                 grid-template-columns: 1fr;
                 max-width: 400px;
                 margin: 0 auto;
-            }
-            .team-grid .team-card:last-child:nth-child(3) {
-                max-width: 100%;
             }
             .footer {
                 text-align: center;
@@ -436,6 +432,12 @@
                         <div class="work-desc">15个发行版 · 官方下载 · 国内镜像源</div>
                         <span class="work-tag">✦ 工具页</span>
                     </a>
+                    <a href="https://github.com/CNFinder-linux/F-antivirus" class="work-card" target="_blank">
+                        <div class="work-icon">🛡️</div>
+                        <div class="work-name">F-杀软</div>
+                        <div class="work-desc">Linux杀软 · 接入大模型API</div>
+                        <span class="work-tag">电脑安全</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -459,7 +461,7 @@
                         </div>
                     </div>
 
-                    <!-- 成员 2：机器猫（职务已缩短为两行） -->
+                    <!-- 成员 2：机器猫 -->
                     <div class="team-card">
                         <div class="avatar">🎨</div>
                         <div class="name">机器猫</div>
@@ -470,7 +472,7 @@
                         </div>
                     </div>
 
-                    <!-- 成员 3：周觉（自动居中） -->
+                    <!-- 成员 3：周觉 -->
                     <div class="team-card">
                         <div class="avatar">📸</div>
                         <div class="name">周觉</div>
